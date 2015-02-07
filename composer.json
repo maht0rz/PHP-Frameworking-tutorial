@@ -1,0 +1,8 @@
+{
+	"autoload":{
+		"psr-4":{
+			"phpocean\\core\\": "./core",
+			"app\\controllers\\": "./controllers"
+		}
+	}
+}
