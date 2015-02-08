@@ -4,11 +4,15 @@ namespace phpocean\core\view;
 
 class View{
 	
-	public function __construct($viewLoader){
+	public function __construct($viewLoader, $engine){
 		$this->viewLoader = $viewLoader;
+		$this->engine = $engine;
 	}
 
-	public function display($viewName){
-		echo $this->viewLoader->load($viewName);
+	public function display($viewName, $variables = []){
+		echo $this->engine->parse(
+			$this->viewLoader->load($viewName),
+			$variables
+		);
 	}
 }
