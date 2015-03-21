@@ -3,7 +3,7 @@
 namespace phpocean\core\view;
 
 class View{
-	
+
 	public function __construct($viewLoader, $engine){
 		$this->viewLoader = $viewLoader;
 		$this->engine = $engine;

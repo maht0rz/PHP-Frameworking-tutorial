@@ -9,9 +9,10 @@ class ViewLoader{
 	}
 
 	public function load($viewName){
-		if( file_exists($this->path.$viewName) ){
-			return file_get_contents($this->path.$viewName);
+		$path = $this->path.$viewName.'.php';
+		if( file_exists($path) ){
+			return file_get_contents($path);
 		}
-		throw new Exception("View does not exist: ".$viewName);
+		throw new \Exception("View does not exist: ".$viewName);
 	}
 }

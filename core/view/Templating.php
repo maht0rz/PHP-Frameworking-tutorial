@@ -8,15 +8,15 @@ class Templating{
 		$this->helpers = $helpers;
 	}
 
-	public function replaceVariables($view, $variables){
-		return preg_replace_callback('/(\\{)(\\{)((?:[a-z]*))(\\})(\\})/',
+	private function replaceVariables(&$view, $variables){
+		$view = preg_replace_callback('/(\\{)(\\{)((?:[a-zA-Z]*))(\\})(\\})/',
 		function($match) use($variables){
 			return $variables[$match[3]];
 		}, $view);
 	}
 
-	public function applyHelpers($view){
-		return preg_replace_callback('/(\\{)(\\{)((?:[a-z0-9_,\\->\\(\\)\\s]*))(\\})(\\})/',
+	public function applyHelpers(&$view){
+		$view = preg_replace_callback('/(\\{)(\\{)((?:[a-zA-Z0-9_,\\->\\(\\)\\s]*))(\\})(\\})/',
 		function($match){
 			$helperWithParams = explode('->', $match[3]);
 			$helper = trim($helperWithParams[0]);
@@ -27,10 +27,10 @@ class Templating{
 
 	public function parse($view, $variables){
 
-		$result = $this->replaceVariables($view, $variables);
-		$result = $this->applyHelpers($result);
+		$this->replaceVariables($view, $variables);
+		$this->applyHelpers($view);
 
-		return $result;
+		return $view;
 	}
 
 }
